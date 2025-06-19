@@ -34,11 +34,6 @@ jobs:
       - name: Upload release asset
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ github.ref_name }}
-          name: Release ${{ github.ref_name }}
-          draft: false
-          prerelease: false
-
           files: |
             zombie-linux-amd64
             zombie-windows-amd64.exe
