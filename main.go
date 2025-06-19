@@ -2,11 +2,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/charmbracelet/glamour"
 	"os"
 	"strings"
-	"terminal_ai/ai_models"
-	"terminal_ai/settings"
+	"terminal_ai/cli"
 )
 
 func main() {
@@ -15,29 +13,20 @@ func main() {
 		os.Exit(1)
 	}
 
+	if args[0] == "configure" {
+		error := cli.Configure()
+		if error != nil {
+			fmt.Println(error)
+			os.Exit(1)
+		}
+		return
+	}
+
 	prompt := strings.Join(args, " ")
-	settings := settings.ReadSettings("settings.json")
-
-	ai, error := ai_models.NewGemini(settings.Key)
+	response, error := cli.Ask(prompt)
 	if error != nil {
-		panic(error)
-	}
-
-	waitMessage, error := glamour.Render("**Pensando...**", settings.Theme)
-	if error != nil {
-		panic(error)
-	}
-
-	fmt.Println(waitMessage)
-
-	response, error := ai.GetResponse(prompt, settings.MaxTokens)
-	if error != nil {
-		panic(error)
-	}
-
-	response, error = glamour.Render(response, settings.Theme)
-	if error != nil {
-		panic(error)
+		fmt.Println(error)
+		os.Exit(1)
 	}
 
 	fmt.Println(response)
