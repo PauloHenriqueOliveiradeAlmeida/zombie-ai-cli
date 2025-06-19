@@ -37,4 +37,4 @@ else
   echo "$INSTALL_DIR já está no PATH."
 fi
 
-echo "Use '$BIN_NAME' para começar!"
+echo "Use '$BIN_NAME configure' para começar!"
