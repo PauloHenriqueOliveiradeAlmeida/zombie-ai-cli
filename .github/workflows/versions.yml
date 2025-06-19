@@ -35,8 +35,8 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            zumbi-linux-amd64
-            zumbi-windows-amd64.exe
-            zumbi-darwin-amd64
+            zombie-linux-amd64
+            zombie-windows-amd64.exe
+            zombie-darwin-amd64
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
